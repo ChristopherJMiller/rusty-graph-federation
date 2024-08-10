@@ -20,6 +20,15 @@
             inherit system overlays;
           };
 
+          dockerImage = pkgs.dockerTools.streamLayeredImage {
+            name = "rusty-graph-profile";
+            tag = "latest";
+            contents = [ bin ];
+            config = {
+              Cmd = [ "${bin}/bin/profile" ];
+            };
+          };
+
           rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
           craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchain;
           src = craneLib.cleanCargoSource ./.;
@@ -38,12 +47,14 @@
         {
           packages =
             {
-              inherit bin;
+              inherit bin dockerImage;
               default = bin;
             };
-          devShells.default = mkShell {
-            inputsFrom = [ bin ];
-          };
+          devShells.default = mkShell
+            {
+              inputsFrom = [ bin ];
+              buildInputs = with pkgs; [ dive ];
+            };
         }
       );
 }

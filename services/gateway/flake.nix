@@ -25,6 +25,7 @@
             '';
             installPhase =  ''
               mkdir -p $out/app
+              ln -s ${node-modules}/libexec/gateway/node_modules $out/app/node_modules
               mv build/src/* $out/app
             '';
         };

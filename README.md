@@ -4,7 +4,7 @@ Learning about GraphQL Federation with Rust and Nix
 
 ## Long Term Plan
 
-- Two services, a fake `profile` and `feed` services are deployed, each publish graphql subgraphs
+- Two services, a fake `profile` and `feed`, are deployed and each publish graphql subgraphs
 - Given a k8s annotation, the `discovery` service will be able to publish a schema of subgraphs deployed in a namespace
 - The `gateway` service uses this `discovery` service to publish a federated super graph, and handles ingresses to the services
 

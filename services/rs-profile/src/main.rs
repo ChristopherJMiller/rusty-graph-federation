@@ -15,7 +15,9 @@ async fn graphiql() -> impl IntoResponse {
 #[tokio::main]
 async fn main() -> Result<()> {
     // create the schema
-    let schema = Schema::build(Query, EmptyMutation, EmptySubscription).finish();
+    let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
+        .enable_federation()
+        .finish();
 
     // start the http server
     let app = Route::new().at("/", get(graphiql).post(GraphQL::new(schema)));

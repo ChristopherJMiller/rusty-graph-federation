@@ -1,4 +1,4 @@
-# Rusty Graph Federation
+# Rusty Graph Federation 🦀
 
 Learning about GraphQL Federation with Rust and Nix
 

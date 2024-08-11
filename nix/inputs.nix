@@ -6,6 +6,7 @@ let
     yarn
     dive
     just
+    minikube
   ];
 in
 {

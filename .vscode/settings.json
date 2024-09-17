@@ -1,3 +1,8 @@
 {
-  "nixEnvSelector.nixFile": "${workspaceFolder}/default.nix"
+  "nixEnvSelector.nixFile": "${workspaceFolder}/default.nix",
+  "rust-analyzer.linkedProjects": [
+    "services/discovery/Cargo.toml",
+    "services/feed/Cargo.toml",
+    "services/profile/Cargo.toml"
+  ]
 }

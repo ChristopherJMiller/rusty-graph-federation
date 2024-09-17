@@ -14,12 +14,15 @@ async function main() {
 
   const server = new ApolloServer({ gateway });
 
+  
+
   const { url } = await startStandaloneServer(server, {
     listen: {
       path: "0.0.0.0",
       port: 4000
     }
   });
+
   console.log(`Server running at ${url}`);
 }
 

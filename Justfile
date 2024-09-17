@@ -1,12 +1,14 @@
 
 build-docker SERVICE_PATH:
-    nix build ./services/{{SERVICE_PATH}}#dockerImage && ./result | docker load
+    nix build ./services/{{SERVICE_PATH}}#dockerImage
 
-# Build and load a service into docker
-# TODO, figure out how to reference the top-level cargo lock via flake
-build-docker-rs SERVICE:
-    cp Cargo.lock services/rs-{{SERVICE}}/
-    git add -N services/rs-{{SERVICE}}/Cargo.lock
-    nix build ./services/rs-{{SERVICE}}#dockerImage && ./result | docker load
-    rm services/rs-{{SERVICE}}/Cargo.lock
-    
+load-docker SERVICE_PATH: (build-docker SERVICE_PATH)
+    ./result | docker load
+
+load-minikube SERVICE: (build-docker SERVICE)
+    ./result | minikube image load -
+
+deploy:
+    kubectl delete -k manifests/
+    for service in `ls services/`; do just load-minikube $service; done
+    kubectl apply -k manifests/

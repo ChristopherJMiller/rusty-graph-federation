@@ -5,8 +5,12 @@ Learning about GraphQL Federation with Rust and Nix
 ## The Setup
 
 - Two services, a fake `profile` and `feed`, are deployed and each publish graphql subgraphs
-- Given a k8s annotation, the `discovery` service will be able to publish a directory of subgraphs deployed in a namespace
+  - `profile` publishes a `User` simple object
+  - `feed` publishes `Feed` simple object
+- Given a `gateway.chrismiller.xyz/port` k8s annotation, the `discovery` service will be able to publish a directory of subgraphs deployed in a namespace
 - The `gateway` service uses this `discovery` service to publish a federated supergraph, and handles request routing to the services
+
+![apollo sandbox showing the profile and feed subgraphs being queryable in a single graphql query](/.images/sandbox.png)
 
 ## Getting Started
 

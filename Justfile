@@ -12,4 +12,5 @@ load-minikube SERVICE: (build-docker SERVICE)
 deploy:
     kubectl delete --ignore-not-found=true -k manifests/
     for service in `ls services/`; do just load-minikube $service; done
+    kubectl apply -k manifests/nginx-gateway
     kubectl apply -k manifests/

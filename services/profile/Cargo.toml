@@ -9,3 +9,5 @@ async-graphql-poem = "7.0.7"
 anyhow = "1"
 tokio = { version = "1", features = ["full"] }
 poem = "3"
+tracing = "0.1"
+tracing-subscriber = "0.3"

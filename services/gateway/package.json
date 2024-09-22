@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "~20",
     "prettier": "~3.2",
     "rimraf": "~5.0",
@@ -20,7 +21,11 @@
   "dependencies": {
     "@apollo/gateway": "^2.8.4",
     "@apollo/server": "^4.11.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "fetch-retry": "^6.0.0",
     "graphql": "^16.9.0",
+    "http": "^0.0.1-security",
     "tslib": "~2.6"
   }
 }

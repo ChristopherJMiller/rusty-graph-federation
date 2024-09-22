@@ -20,16 +20,18 @@ spec:
           image: rusty-graph-feed
           imagePullPolicy: Never
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
               name: http
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: feed
+  annotations:
+    gateway.chrismiller.xyz/port: "8000"
 spec:
   selector:
     app: feed
   ports:
     - protocol: TCP
-      port: 8080
+      port: 8000

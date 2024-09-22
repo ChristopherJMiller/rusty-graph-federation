@@ -1,5 +1,7 @@
 use anyhow::Result;
-use async_graphql::{http::GraphiQLSource, EmptyMutation, EmptySubscription, Schema};
+use async_graphql::{
+    extensions::Tracing, http::GraphiQLSource, EmptyMutation, EmptySubscription, Schema,
+};
 use async_graphql_poem::*;
 use poem::{listener::TcpListener, web::Html, *};
 use query::Query;
@@ -15,7 +17,10 @@ async fn graphiql() -> impl IntoResponse {
 #[tokio::main]
 async fn main() -> Result<()> {
     // create the schema
-    let schema = Schema::build(Query, EmptyMutation, EmptySubscription).finish();
+    let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
+        .enable_federation()
+        .extension(Tracing)
+        .finish();
 
     // start the http server
     let app = Route::new().at("/", get(graphiql).post(GraphQL::new(schema)));

@@ -1,5 +1,7 @@
 use anyhow::Result;
-use async_graphql::{http::GraphiQLSource, EmptyMutation, EmptySubscription, Schema};
+use async_graphql::{
+    extensions::Tracing, http::GraphiQLSource, EmptyMutation, EmptySubscription, Schema,
+};
 use async_graphql_poem::*;
 use poem::{listener::TcpListener, web::Html, *};
 use query::Query;
@@ -17,6 +19,7 @@ async fn main() -> Result<()> {
     // create the schema
     let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
         .enable_federation()
+        .extension(Tracing)
         .finish();
 
     // start the http server

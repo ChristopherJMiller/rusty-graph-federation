@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gateway
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: gateway
@@ -22,6 +22,9 @@ spec:
           ports:
             - containerPort: 4000
               name: http
+          env:
+            - name: DISCOVERY_URL
+              value: http://discovery:3030/subgraphs
 ---
 apiVersion: v1
 kind: Service

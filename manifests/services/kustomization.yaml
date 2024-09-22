@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: graph-federation
+resources:
+  - feed.yaml
+  - graphql-gateway.yaml
+  - profile.yaml

@@ -36,3 +36,20 @@ spec:
   ports:
     - protocol: TCP
       port: 4000
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: graphql-gateway-route
+spec:
+  parentRefs:
+    - name: graph-federation
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /graphql
+      backendRefs:
+        - name: gateway
+          port: 4000
